@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "httparty"
+
+movies_api = HTTParty.get("https://tmdb.lewagon.com/movie/top_rated")
+results = movies_api["results"]
+
+results.each do |result|
+ puts Movie.create(title: result["original_title"], overview: result["overview"], poster_url: 'https://image.tmdb.org/t/p/original/#{result["poster_path"]}', rating: result["vote_average"])
+end
