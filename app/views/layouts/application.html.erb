@@ -11,6 +11,34 @@
   </head>
 
   <body>
+      <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <%=image_tag "popcorn.png"%>
+</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto gap-3">
+          <li class="nav-item active">
+            <%=link_to "My Lists", lists_path, class: "link-offset-2 link-underline link-underline-opacity-0 text-black"%>
+            <%# <a class="nav-link" href="/app/views/lists/index.html.erb">My Lists</a> %>
+          </li>
+          <li class="nav-item">
+                        <%=link_to "New List", new_list_path, class: "link link-offset-2 link-underline link-underline-opacity-0 text-black"%>
+            <%# <a class="nav-link" href="/app/views/lists/new.html.erb">New List</a> %>
+          </li>
+
+          <!--li class="nav-item"-->
+          <!--/li-->
+      </ul>
+    </div>
+  </div>
+</div>
+
+
     <%= yield %>
   </body>
 </html>
