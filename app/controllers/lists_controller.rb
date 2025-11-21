@@ -12,6 +12,8 @@ class ListsController < ApplicationController
     #   @movie_id = bookmark.movie_id
     #   @movie = Movie.find(@movie_id)
     # end
+
+    @bookmark = Bookmark.new
   end
 
   def new

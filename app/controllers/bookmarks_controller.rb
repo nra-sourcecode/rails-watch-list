@@ -1,10 +1,10 @@
 class BookmarksController < ApplicationController
-  def new
-    list_id = params[:list_id]
-	  @list = List.find(list_id)
+  # def new
+  #   list_id = params[:list_id]
+	#   @list = List.find(list_id)
 
-    @bookmark = Bookmark.new
-  end
+  #   @bookmark = Bookmark.new
+  # end
 
   def create
 
