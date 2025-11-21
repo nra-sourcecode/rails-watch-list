@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path "banner.jpg" %>);">
     <h1>Save every movie you want</h1>
     <p>classic</p>
 </div>
@@ -10,7 +10,8 @@
 </div>
 <div class="d-flex gap-5">
 <%@lists.each do |list|%>
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+<%url = list.photo.attached? ? list.photo.key : ''%>
+  <div class="card-category"  style="background-image: url('<%=cl_image_path url, height:300, width: 400, crop: :fill%>')">
 <%=link_to list.name, list_path(list), class: "text-white link-offset-2 link-underline link-underline-opacity-0"%>
 </div>
 <%end%>

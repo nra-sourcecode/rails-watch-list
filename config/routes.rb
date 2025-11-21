@@ -11,9 +11,15 @@ Rails.application.routes.draw do
   get "lists", to: "lists#index"
   get "lists/:id", to: "lists#show", as: :list
 
+  get "lists/:id/edit", to: "lists#edit", as: :edit_list
+  patch "lists/:id", to: "lists#update"
+
   get "lists/:list_id/bookmarks/new", to: "lists#show", as: :new_bookmark
   post "lists/:list_id/bookmarks", to: "bookmarks#create", as: :list_bookmarks
   delete "bookmarks/:id", to: "bookmarks#destroy", as: :bookmark
+
+  post "lists/:list_id/reviews", to: "reviews#create", as: :list_reviews
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

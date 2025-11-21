@@ -1,11 +1,64 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+<%url = @list.photo.attached? ? @list.photo.key : ''%>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%=cl_image_path url, crop: :fill%>')">
     <h1><%=@list.name%></h1>
 </div>
 
 <div class="container">
-  <div class="d-flex justify-content-end py-3">
-<%=link_to "add a new bookmark", new_bookmark_path(@list), class: "link btn btn-success text-white"%>
+  <div class="d-flex justify-content-end py-3 gap-2">
+<%=link_to "edit your list", edit_list_path(@list), class: "link btn btn-success text-white", data: {
+              bs_toggle: "modal",
+              bs_target: "#staticBackdrop"
+            } %>
+  <%=link_to "add a bookmark", new_bookmark_path(@list), class: "link btn btn-success text-white", data: {
+              bs_toggle: "modal",
+              bs_target: "#staticBackdrop2"
+            } %>
   </div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit your list</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%=simple_form_for(@list) do |f| %>
+        <%=f.input :name%>
+        <%=f.input :photo, as: :file%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%=f.submit%>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a bookmark</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%=simple_form_for [@list, @bookmark] do |f|%>
+        <%=f.text_area :comment, class: 'bookmark-text-area' %>
+        <%=f.association :movie, class: 'bookmark-dropdown'%>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%=f.submit%>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <%@bookmarks.each do |bookmark|%>
@@ -31,11 +84,14 @@
 </div>
 </div>
 
-<div class="container-form py-5 border">
-<h4>Add a new Bookmark</h4>
-<%=simple_form_for [@list, @bookmark] do |f|%>
-<%=f.text_area :comment, class: 'bookmark-text-area' %>
-<%=f.association :movie, class: 'bookmark-dropdown'%>
-<%=f.submit%>
-<%end%>
+<div>
+        <%=simple_form_for [@list, @review] do |f| %>
+        <%=f.input :comment%>
+        <%=f.input :rating%>
+        <%=f.submit%>
+        <%end%>
+</div>
+
+
+
 </div>

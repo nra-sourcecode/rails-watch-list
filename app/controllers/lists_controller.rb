@@ -8,12 +8,11 @@ class ListsController < ApplicationController
     id = params[:id]
     @list = List.find(id)
     @bookmarks = @list.bookmarks
-    # @bookmarks.each do |bookmark|
-    #   @movie_id = bookmark.movie_id
-    #   @movie = Movie.find(@movie_id)
-    # end
 
     @bookmark = Bookmark.new
+
+    @reviews = @list.reviews
+    @review = Review.new
   end
 
   def new
@@ -25,8 +24,21 @@ class ListsController < ApplicationController
     redirect_to list_path(@list)
   end
 
+  def edit
+    id = params[:id]
+    @list = List.find(id)
+  end
+
+  def update
+    id = params[:id]
+    @list = List.find(id)
+
+    @list.update(list_params)
+    redirect_to list_path(@list)
+  end
+
   private
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 end
